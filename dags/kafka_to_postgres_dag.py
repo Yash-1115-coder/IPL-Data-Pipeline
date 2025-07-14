@@ -22,7 +22,7 @@ def consume_and_insert():
             bootstrap_servers="kafka:9092",
             auto_offset_reset="earliest",
             enable_auto_commit=True,
-            group_id="airflow-pg-group-new-final",  # 🔁 change this every run to force reconsume
+            group_id="airflow-pg-group-new-001",  # 🔁 change this every run to force reconsume
             value_deserializer=lambda x: x.decode("utf-8", errors="replace"),
             consumer_timeout_ms=5000,
         )

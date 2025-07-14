@@ -1,0 +1,45 @@
+[2025-07-11T12:30:21.319+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: kafka_to_postgres_dag.consume_and_store manual__2025-07-11T12:30:18.258535+00:00 [queued]>
+[2025-07-11T12:30:21.331+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: kafka_to_postgres_dag.consume_and_store manual__2025-07-11T12:30:18.258535+00:00 [queued]>
+[2025-07-11T12:30:21.331+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-07-11T12:30:21.350+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): consume_and_store> on 2025-07-11 12:30:18.258535+00:00
+[2025-07-11T12:30:21.358+0000] {standard_task_runner.py:57} INFO - Started process 751 to run task
+[2025-07-11T12:30:21.364+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'kafka_to_postgres_dag', 'consume_and_store', 'manual__2025-07-11T12:30:18.258535+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/kafka_to_postgres_dag.py', '--cfg-path', '/tmp/tmpb6y46q9c']
+[2025-07-11T12:30:21.367+0000] {standard_task_runner.py:85} INFO - Job 6: Subtask consume_and_store
+[2025-07-11T12:30:21.488+0000] {task_command.py:410} INFO - Running <TaskInstance: kafka_to_postgres_dag.consume_and_store manual__2025-07-11T12:30:18.258535+00:00 [running]> on host 2d5a9df6af8f
+[2025-07-11T12:30:21.660+0000] {taskinstance.py:1545} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='kafka_to_postgres_dag' AIRFLOW_CTX_TASK_ID='consume_and_store' AIRFLOW_CTX_EXECUTION_DATE='2025-07-11T12:30:18.258535+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-11T12:30:18.258535+00:00'
+[2025-07-11T12:30:21.664+0000] {kafka_to_postgres_dag.py:19} INFO - Connecting to Kafka...
+[2025-07-11T12:30:21.674+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.18.0.5', 9092)]>: connecting to kafka:9092 [('172.18.0.5', 9092) IPv4]
+[2025-07-11T12:30:21.719+0000] {conn.py:618} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.18.0.5', 9092)]>: Broker version identified as 2.6
+[2025-07-11T12:30:21.719+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Connection complete.
+[2025-07-11T12:30:21.727+0000] {subscription_state.py:181} INFO - Updating subscribed topics to: ('airflow-topic',)
+[2025-07-11T12:30:21.729+0000] {kafka_to_postgres_dag.py:29} INFO - ✅ Connected to Kafka
+[2025-07-11T12:30:21.750+0000] {kafka_to_postgres_dag.py:35} INFO - ✅ Connected to Postgres
+[2025-07-11T12:30:21.764+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.5', 9092)]>: connecting to kafka:9092 [('172.18.0.5', 9092) IPv4]
+[2025-07-11T12:30:21.765+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Connection complete.
+[2025-07-11T12:30:21.765+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Closing connection. 
+[2025-07-11T12:30:21.874+0000] {cluster.py:401} INFO - Coordinator for group/airflow-pg-group-new-001 is ('coordinator-1', 'kafka', 9092, None)
+[2025-07-11T12:30:21.875+0000] {base.py:788} INFO - Discovered coordinator coordinator-1 for group airflow-pg-group-new-001
+[2025-07-11T12:30:21.876+0000] {base.py:848} INFO - Starting new heartbeat thread
+[2025-07-11T12:30:21.877+0000] {consumer.py:365} INFO - Revoking previously assigned partitions () for group airflow-pg-group-new-001
+[2025-07-11T12:30:21.878+0000] {base.py:419} INFO - Failed to join group airflow-pg-group-new-001: NodeNotReadyError: coordinator-1
+[2025-07-11T12:30:21.880+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.5', 9092)]>: connecting to kafka:9092 [('172.18.0.5', 9092) IPv4]
+[2025-07-11T12:30:21.881+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Connection complete.
+[2025-07-11T12:30:21.982+0000] {base.py:532} INFO - (Re-)joining group airflow-pg-group-new-001
+[2025-07-11T12:30:22.008+0000] {base.py:637} INFO - Received member id kafka-python-2.2.15-f78a6df6-4476-4817-90fb-b9ff6cfc0c3c for group airflow-pg-group-new-001; will retry join-group
+[2025-07-11T12:30:22.009+0000] {base.py:419} INFO - Failed to join group airflow-pg-group-new-001: [Error 79] MemberIdRequiredError
+[2025-07-11T12:30:22.010+0000] {base.py:532} INFO - (Re-)joining group airflow-pg-group-new-001
+[2025-07-11T12:30:25.032+0000] {base.py:594} INFO - Successfully joined group airflow-pg-group-new-001 <Generation 3 (member_id: kafka-python-2.2.15-f78a6df6-4476-4817-90fb-b9ff6cfc0c3c, protocol: range)>
+[2025-07-11T12:30:25.033+0000] {base.py:596} INFO - Elected group leader -- performing partition assignments using range
+[2025-07-11T12:30:25.075+0000] {subscription_state.py:254} INFO - Updated partition assignment: [('airflow-topic', 0)]
+[2025-07-11T12:30:25.076+0000] {consumer.py:249} INFO - Setting newly assigned partitions (('airflow-topic', 0),) for group airflow-pg-group-new-001
+[2025-07-11T12:30:26.751+0000] {kafka_to_postgres_dag.py:48} INFO - ✅ Inserted 0 messages.
+[2025-07-11T12:30:26.772+0000] {base.py:1052} INFO - Stopping heartbeat thread
+[2025-07-11T12:30:26.773+0000] {base.py:891} INFO - Leaving consumer group (airflow-pg-group-new-001).
+[2025-07-11T12:30:26.783+0000] {base.py:906} INFO - LeaveGroup request for group airflow-pg-group-new-001 returned successfully
+[2025-07-11T12:30:26.783+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Closing connection. 
+[2025-07-11T12:30:26.783+0000] {fetcher.py:786} INFO - Fetch to node 1 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>
+[2025-07-11T12:30:26.784+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Closing connection. 
+[2025-07-11T12:30:26.784+0000] {python.py:183} INFO - Done. Returned value was: None
+[2025-07-11T12:30:26.818+0000] {taskinstance.py:1345} INFO - Marking task as SUCCESS. dag_id=kafka_to_postgres_dag, task_id=consume_and_store, execution_date=20250711T123018, start_date=20250711T123021, end_date=20250711T123026
+[2025-07-11T12:30:26.870+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-07-11T12:30:26.888+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

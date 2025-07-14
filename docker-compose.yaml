@@ -28,13 +28,13 @@ services:
     container_name: kafka
     ports:
       - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
-      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_CFG_LISTENERS: PLAINTEXT://0.0.0.0:9092,HOST://0.0.0.0:29092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,HOST://localhost:29092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,HOST:PLAINTEXT
       KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       ALLOW_PLAINTEXT_LISTENER: yes
     depends_on:
@@ -44,17 +44,53 @@ services:
 
 
   spark:
-    image: bitnami/spark:latest
+    build:
+      context: ./spark
+      dockerfile: Dockerfile.spark
     container_name: spark
     environment:
-      SPARK_MODE: master
+      - SPARK_MODE=master
+    volumes:
+      - ./spark:/app
+    ports:
+      - "4040:4040"
     networks:
       - airflow_net
 
   airflow:
+    image: apache/airflow:2.6.3-python3.8
+    container_name: airflow
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:virat@postgres:5432/airflow
+      AIRFLOW__CORE__FERNET_KEY: '3JDtaS6HMedaYb-YOVSZG-g3KxGUW0nibyoAa3YeyEg'
+      AIRFLOW__WEBSERVER__SECRET_KEY: '3JDtaS6HMedaYb-YOVSZG-g3KxGUW0nibyoAa3YeyEg'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./kafka:/opt/airflow/kafka
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "
+        pip install kafka-python psycopg2-binary &&
+        airflow db init &&
+        airflow users create --username admin --password admin --firstname Boss --lastname Man --role Admin --email boss@example.com &&
+        airflow scheduler &
+        airflow webserver
+      "
+    networks:
+      - airflow_net
+  
+  scheduler:
     build:
       context: .
-    container_name: airflow
+    container_name: airflow_scheduler
     restart: always
     depends_on:
       - postgres
@@ -62,23 +98,22 @@ services:
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:virat@postgres:5432/airflow
-      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__FERNET_KEY: '3JDtaS6HMedaYb-YOVSZG-g3KxGUW0nibyoAa3YeyEg'
+      AIRFLOW__WEBSERVER__SECRET_KEY: '3JDtaS6HMedaYb-YOVSZG-g3KxGUW0nibyoAa3YeyEg'
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+
     volumes:
+      - ./logs:/opt/airflow/logs
       - ./dags:/opt/airflow/dags
       - ./kafka:/opt/airflow/kafka
-    ports:
-      - "8080:8080"
     entrypoint: >
       bash -c "
-        airflow db init &&
-        airflow users create --username admin --password admin --firstname Boss --lastname Man --role Admin --email boss@example.com &&
-        airflow webserver
+        airflow db upgrade &&
+        airflow scheduler
       "
     networks:
       - airflow_net
-
 
 volumes:
   postgres_data:

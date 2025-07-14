@@ -3,18 +3,16 @@ import json
 from kafka import KafkaProducer
 import numpy as np
 
-# ✅ Read and sanitize
-df = pd.read_csv("/opt/airflow/IPL_Player_Stats.csv")
-df = df.replace({np.nan: None})  # ← THIS is critical
+df = pd.read_csv("/home/yash/airflow_project/IPL_Player_Stats.csv")
+df = df.replace({np.nan: None})
 
 producer = KafkaProducer(
-    bootstrap_servers='kafka:9092',
-    value_serializer=lambda x: json.dumps(x).encode('utf-8')
+    bootstrap_servers="localhost:29092",
+    value_serializer=lambda x: json.dumps(x).encode("utf-8")
 )
 
 for _, row in df.iterrows():
-    message = row.to_dict()
-    producer.send("airflow-topic", value=message)
+    producer.send("airflow-topic", value=row.to_dict())
 
 producer.flush()
 print("✅ All records sent to Kafka.")

@@ -74,7 +74,33 @@ docker-compose build --no-cache spark
 docker-compose up -d spark
 
 
-💪 Result
-You now have a realtime pipeline from Kafka → Spark → CSV ✅
-Structured, checkpointed, and fault-tolerant
-Sets up perfectly for Airflow orchestration in Phase 3
+🚫 Common Errors & Fixes
+Error: Duplicate records
+Cause: Kafka re-read old offsets
+Fix: Clean the Kafka topic and the checkpoint folder before streaming again.
+
+Error: Folder permission error
+Cause: Docker folder access issues
+Fix: Use mkdir -p to create folders, then run chmod -R 777 on them to grant permissions.
+
+Error: UnknownTopicOrPartition
+Cause: Topic was recreated but not yet fully initialized
+Fix: Wait a few seconds after creating the topic before producing or consuming.
+
+Error: Metadata file exists
+Cause: .crc or temp files not cleaned inside the checkpoint directory
+Fix: Delete all hidden files (.*) inside the checkpoint directory using:
+rm -rf /path/to/checkpoint/* /path/to/checkpoint/.* 2>/dev/null
+
+
+
+✅ Final Result
+182 messages streamed to Kafka
+
+Processed by Spark
+
+Written to clean CSV files
+
+No duplicates
+
+Output ready for GCP ingestion
