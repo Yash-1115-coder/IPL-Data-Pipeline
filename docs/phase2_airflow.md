@@ -27,49 +27,13 @@ This phase establishes a robust data pipeline using **Apache Kafka** and **Apach
 
 ---
 
-### 🛠 File: `spark/spark_stream.py`
+### 🛠 File Architecture: `spark/spark_stream.py`
 
-```python
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_json, col
-from pyspark.sql.types import StructType, StringType, IntegerType
 
 # Define schema
-schema = StructType() \
-    .add("Player", StringType()) \
-    .add("COUNTRY", StringType()) \
-    .add("TEAM", StringType()) \
-    .add("AGE", IntegerType()) \
-    .add("SOLD_PRICE", StringType())
-
 # Spark Session
-spark = SparkSession.builder \
-    .appName("KafkaSparkStreaming") \
-    .getOrCreate()
-
-spark.sparkContext.setLogLevel("WARN")
-
 # Read Kafka Stream
-df_raw = spark.readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", "kafka:9092") \
-    .option("subscribe", "airflow-topic") \
-    .option("startingOffsets", "earliest") \
-    .load()
-
-df_parsed = df_raw.selectExpr("CAST(value AS STRING) as json_value") \
-    .select(from_json(col("json_value"), schema).alias("data")) \
-    .select("data.*")
-
 # Write stream to CSV
-query = df_parsed.writeStream \
-    .outputMode("append") \
-    .format("csv") \
-    .option("path", "/app/artifacts/ipl_stream_output") \
-    .option("checkpointLocation", "/app/checkpoint/ipl") \
-    .start()
-
-query.awaitTermination()
 
 
 📦 Docker Compose Spark Block
