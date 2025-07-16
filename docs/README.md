@@ -125,16 +125,3 @@ Course Inspiration: DataTalksClub’s DE Zoomcamp
 Built & implemented by Yashas Rajesh
 
 ---
-
-## ✅ NEXT STEP: Add & Push to GitHub
-
-Now run these commands from inside your project:
-
-```bash
-code .
-# Paste the README content above into README.md and save it.
-
-# Then push to GitHub:
-git add README.md
-git commit -m "📝 Added complete README for IPL Data Pipeline"
-git push
