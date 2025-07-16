@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ipl-streaming-project",
+  "private_key_id": "e68e7cd0887c5b454205ce869bb820cf2d7b879e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC4w56QsAV7vgqa\n3TshzZXKH2I6uVa9QjkGjaGAwexS8rwFev8OZuWGgqS+IRpi1Pq9CWbgZgwnAElv\n4oHvZSYFO1nmLNhQZklPvcrOMX6awptJaIe3NWpPvO9EF5t9ArcKh85PyzwzODSK\n6gOb7+PMU+OHigVg6GviF4hbuFfmgQfDFp8U19zQ/KldAFtRes4sAFA1slRJMqvy\nj8vxhEQkaJ9a3n9U0VjtQ2pOUv8MaUQTEq9ekPCJovpuL+qN3dYbqfZgo5mivL+Y\nIsVETfLaCGgMwbx9clH5IowOD222C+hB7xdQdz8jnQOqpuXXpkHFn+MXcLCG8FY7\nYkJjs/IJAgMBAAECggEABAxlQQ5aUGfNm68VSJxUl+UwJdFB0UvOLBKWY1fcccTX\n0dbsF8ixZs0eBvx6s4evJs0579jMk14yPb1c034H4z11rtF0u+5B1Pl3pCT5fTKe\nbHFZ5+3Hso+VPoy133tbv2NSZfUyEH0+yXxvL8+F0khUR/gCPilZk86oMjpL0sUf\nd3eQAaeyaL5Pt9WjB92AT1HTtypa4YOLNf2VdOQxS3B1lB4B3vEiAcwhN0fwTb8b\nbsSVPIdFSX6rBLvH+i8BqdytuAOJdAi1cMSw5qPEYejffSZt7A09CrxONlgoyOoz\nDU2AccJrGYUYzqCbBtQgdCBddJXhH0+LbrV+YfzycQKBgQDkny/JZbz4uOMn6iju\no0qmN4E/PdPzHXPGOX3Oq1DNn6G9uWNJpLurkaxTnB1J5FaIi+OnU1V0Ed8C/496\nzqHHMJqQ6tkkOArZLG8dk6chKBGEHRhPTqsYJH3e/8Qt2iCxzqRX+xeivHk9FikQ\nbu6yWNliDGPIiN+jfJIVphVz8wKBgQDO4+WAm+eJc/XEz01JeJyDzC6org0ULipx\n7bKImVa6U/lUVfeleVqtjGmgbYwQ2E/ZJMY0xUJLIMa6NoGll3uM+wsxR+3aCgrG\nEXjiSGvOizvPm+NaMzTY2tIlGJFJpp40ZluM1e7KDUFPivgwySKm6Wuozo5ibp1m\nwYAdJSMNEwKBgB5EBKuA0HeM4mWSVkDhVSyUBIQ+xyRULdN8IO+PNm9CRsM7G63Q\nJRgdfNbEwAvcMqh4/HZWTeXDx+Y5tuDnIfugr5WnwX9N/AGsJDmiJmn5R/hZcbJu\nE7BqhE9VRL9dNR7U4GTVVNeyY8p2eJE4Xlk18fFM+pi9pf2arCw5hHWJAoGAKijg\nvMuIbEc4HwoLetxcMLNsEq2dNq6Nsbe5eQKeXMv99ASsuYi4RMNnRuzr7QbXhq1q\nwpgsATlFpe6zjrYG1FzYFAvPWW5QcbpfwuT1KxrObmka9GeY7lPxHOQbv0F33b+6\nCkISLhRzaa0tFGv4ZsEMUlL9Suu1oZnu7IGD2gcCgYBSp7u+c0XxCkL16rK5rNDz\ns9dNMrvTVx2LW/fBcCFMqxwJjihSDHHEWIwuAUkXwwmetfJbwsZJb+Ptu9UEAn24\nTRly5snV5j9ucykLXeDOPqW61ab77SikTv6vJLm9uJl3/zMI6hkxCrRrNVkRwtQb\nUblojLSZ++Eq/g4IkNNj2g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "spark-access@ipl-streaming-project.iam.gserviceaccount.com",
+  "client_id": "118137789746780413795",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spark-access%40ipl-streaming-project.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

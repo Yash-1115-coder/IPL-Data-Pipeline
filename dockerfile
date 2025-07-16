@@ -1,1 +1,11 @@
-FROM apache/airflow:2.6.3-python3.8
+FROM bitnami/spark:3.4.1
+
+USER root
+
+# Copy GCP credentials and jars (adjust path if needed)
+COPY ./ipl-streaming-project-*.json /app/
+COPY ./jars/*.jar /opt/bitnami/spark/jars/
+
+# Copy your project files
+COPY . /app
+WORKDIR /app

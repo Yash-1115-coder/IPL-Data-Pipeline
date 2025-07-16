@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: ipl_dataset
+    database: ipl-streaming-project
+    schema: ipl_dataset
+    tables:
+      - name: raw_ipl_stats

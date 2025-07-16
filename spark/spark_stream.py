@@ -82,13 +82,17 @@ df_parsed = (
 
 # ✅ Write to CSV under artifacts/ipl_stream_output
 query = (
-    df_parsed.writeStream
-    .outputMode("append")
+    df_parsed.writeStream.outputMode("append")
     .format("csv")
     .option("header", "true")
-    .option("path", "/app/artifacts/ipl_stream_output")
-    .option("checkpointLocation", "/app/artifacts/checkpoint")
+    .option(
+        "path", "gs://ipl-stream-output/ipl_stream_output/"
+    )  # write folder inside bucket
+    .option(
+        "checkpointLocation", "gs://ipl-stream-output/checkpoint/"
+    )  # checkpoint folder
     .start()
 )
+
 
 query.awaitTermination()
